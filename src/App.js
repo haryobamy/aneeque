@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { GlobalStyles } from "./globalStyle";
+import { SidebarNav, Sidebar, Main, Rightbar } from "./components";
+import { Dashboard } from "./page";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  Employee,
+  Orders,
+  OverviewPage,
+  Products,
+  Settings,
+  Shipment,
+} from "./components/subpage";
+import { DashboardWrapper, MainContainer } from "./globalStyle";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles />
+      <Router>
+        <div className="mx-3 my-2 text-primary" style={{}}>
+          <Switch>
+            <DashboardWrapper>
+              <SidebarNav />
+              <MainContainer>
+                <Switch>
+                  <Route exact path="/Overview">
+                    <OverviewPage />
+                  </Route>
+                  <Route exact path="/orders">
+                    <Orders />
+                  </Route>
+                  <Route exact path="/products">
+                    <Products />
+                  </Route>
+                  <Route exact path="/settings">
+                    <Settings />
+                  </Route>
+                  <Route exact path="/shipment">
+                    <Shipment />
+                  </Route>
+                  <Route exact path="/employee">
+                    <Employee />
+                  </Route>
+                </Switch>
+              </MainContainer>
+              <Rightbar />
+            </DashboardWrapper>
+          </Switch>
+        </div>
+      </Router>
+    </>
   );
-}
+};
 
 export default App;
